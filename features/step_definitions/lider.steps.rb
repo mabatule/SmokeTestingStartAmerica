@@ -4,8 +4,15 @@ Given('estoy en la pagina de inicio de Start') do
   end
   
   When('ingreso los campos necesarios para iniciar sesion') do |table|
-    fill_in 'email', :with => ENV['USER']
-    fill_in 'password', :with => ENV['PSW']
+    data = table.rows_hash
+    data.each_pair do |key, value|
+    case key
+    when "Correo:"
+      fill_in 'email', :with => value
+    when "Contraseña:"
+      fill_in 'password', :with => value
+    end
+    end
 end
   
   Then('voy a presionar el boton {string}') do |string|
@@ -41,18 +48,20 @@ end
     	raise "deberia haber un titulo de eventos pasados"	
     end
   end
-  When('presiono el boton de participar en el evento {string}') do |string|
-    click_button('participar_'+string)
+  When('presiono el boton de participar en el evento {string}') do |evento|
+    click_button('participar_'+evento)
+    sleep(2)
   end
-  Then('el boton de participar  en el evento {string} cambia a dejar de participar') do |string|
-    find_by_id('DejarParticipar_'+string)
+  Then('el boton de participar  en el evento {string} cambia a dejar de participar') do |evento|
+    find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div.Container-Body > div:nth-child(5) > div > div.CardBody-Eventos.card-body > div > button:nth-child(1)')
   end
-  When('presiono el boton de dejar de participar en el evento {string}') do |string|
-    click_button('DejarParticipar_'+string)
+  When('presiono el boton de dejar de participar en el evento {string}') do |evento|
+    click_button('DejarParticipar_'+evento)
+    sleep(2)
   end
   
-  Then('el boton de participar  en el evento {string} cambia a participar') do |string|
-    find_by_id('participar_'+string)
+  Then('el boton de dejar de participar en el evento {string} cambia a participar') do |string|
+    find(:css,"#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div.Container-Body > div:nth-child(5) > div > div.CardBody-Eventos.card-body > div > button:nth-child(1)")
   end
   When('presiono el boton de detalles en el evento {string}') do |string|
     click_button('Detalles_'+string)
@@ -73,6 +82,62 @@ end
     end
   end
   
+  Then('deberia ver') do |table|
+    data = table.rows_hash
+    data.each_pair do |key, value|
+    case key
+    when "horaIn"
+        hora=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div.col.text-1 > div > p:nth-child(1)').text
+        if(hora==value)
+          puts "Hora de inicio validada"    
+        else
+          raise "Se esperaba  "+hora   
+        end
+      when "fecha"
+        fecha=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div.col.text-1 > div > p:nth-child(2)').text
+        if(fecha==value)
+          puts "Fecha validada"    
+        else
+          raise "Se esperaba "+fecha
+        end
+      when "proyecto"
+        proyecto=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div.col.text-1 > div > p:nth-child(3)').text
+        if(proyecto==value)
+          puts "proyecto validada"    
+        else
+          raise "Se esperaba "+proyecto
+        end
+      when "horaFin"
+        horaFin=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div:nth-child(2) > div > p:nth-child(1)').text
+        if(horaFin==value)
+          puts "hora finalizacion validada"    
+        else
+          raise "Se esperaba "+horaFin
+        end
+      when "lugar"
+        lugar=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div:nth-child(2) > div > p:nth-child(2)').text
+        if(lugar==value)
+          puts "lugar validado"    
+        else
+          raise "Se esperaba "+lugar
+        end
+      when "categoria"
+        categoria=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div:nth-child(2) > div > p:nth-child(3)').text
+        if(categoria==value)
+          puts "categoria validada"    
+        else
+          raise "Se esperaba "+categoria
+        end
+      when "descripcion"
+        descripcion=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.card > div > div > div.col > div > div:nth-child(2) > div > p:nth-child(5)').text
+        if(descripcion==value)
+          puts "descripcion validada"    
+        else
+          raise "Se esperaba "+descripcion
+        end
+    end
+    end
+  end
   When('presiono el boton para guardar el evento') do
     click_button('GuardarEvento')
     sleep(3)
@@ -81,49 +146,7 @@ end
   Then('deberia poder ver la tarjeta {string}') do |name|
     find("div[name='#{name}']")
   end
-  Then('deberia ver') do |table|
-    data = table.rows_hash
-  data.each_pair do |key, value|
-    case key
-	when "horaIn"
-    horaIni=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[1]/div/p[1]').text
-    puts value
-    if (horaIni!=value)
-      raise value 
-    end
-	when "fecha"
-    fecha=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[1]/div/p[2]').text
-    if (fecha!=value)
-      raise "Hora inicial incorrecta" 
-    end
-  when "proyecto"
-     proyecto=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[1]/div/p[3]').text
-     if (proyecto!=value)
-       raise "Hora inicial incorrecta" 
-    end
-  when "horaFin"
-    horaFin=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[2]/div/p[1]').text
-    if (horaFin!=value)
-      raise "Hora inicial incorrecta" 
-    end
-  when "lugar"
-    lugar=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[2]/div/p[2]]').text
-    if (lugar!=value)
-      raise "Hora inicial incorrecta" 
-    end
-  when "categoria"
-    categoria=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[2]/div/p[3]').text
-    if (categoria!=value)
-      raise "Hora inicial incorrecta" 
-    end
-  when "descripcion"
-    descripcion=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div/div[3]/div/div[2]/div/p[5]]').text
-    if (descripcion!=value)
-      raise value 
-    end
-    end
-  end
-end
+
 Then('deberia poder ver una alerta') do
   alerta=find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div')
   if(alerta.text!='Nombre del Evento o Fecha del Evento vacía')
@@ -147,6 +170,12 @@ inicialesPagina=find(:css,'#root > div:nth-child(2) > header > div.header-logo >
 if(inicialesPagina!=iniciales)
   raise "Deberia mostrarse"+iniciales
 end
+end
+When('elijo la categoria {string} en el dropdown') do |categoria|
+  find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div:nth-child(1) > div.Menu-Bar-Evento > div.header-filtro-eventos > select:nth-child(2)').find(:option, categoria).select_option
+end
+When('presiono el boton de detalles en el evento Prueba') do
+  find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div.Container-Body > div:nth-child(19) > div > div.CardBody-Eventos.card-body > div > button:nth-child(2)').click
 end
 
   
