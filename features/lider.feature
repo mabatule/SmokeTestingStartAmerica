@@ -123,3 +123,4 @@ Feature:Realizar operaciones sobre eventos
     And voy a presionar en la cabecera el boton eventos
     When elijo la categoria "Empoderamiento" en el dropdown
     Then deberia poder ver la tarjeta "PruebaEmpoderamiento"
+
