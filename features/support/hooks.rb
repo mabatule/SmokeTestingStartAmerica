@@ -3,6 +3,25 @@ After do
     Capybara.current_session.driver.quit
 end
 
+Before '@SinParticiparEventosLider' do
+  iniciarSesionLider
+  dejarParticiparEvento
+  Capybara.current_session.driver.quit
+
+end
+Before '@SinParticiparEventosCoreTeam' do
+  iniciarSesionCoreTeam
+  dejarParticiparEvento
+  Capybara.current_session.driver.quit
+
+end
+Before '@SinParticiparEventosVoluntario' do
+  iniciarSesionVoluntario
+  dejarParticiparEvento
+  Capybara.current_session.driver.quit
+end
+
+
 After '@eliminarEvento' do 
   iniciarSesion
   find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(3)').click
@@ -30,6 +49,17 @@ Before '@crearEventoFuturo' do
   find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(3)').click
   crearEvento('12/12/2023','EventoPrueba')
   sleep(2)
+  Capybara.current_session.driver.quit
+end
+Before '@participarEnEventoRoles' do
+  iniciarSesionLider
+  participarEventoClick
+
+  iniciarSesionCoreTeam
+  participarEventoClick
+
+  iniciarSesionVoluntario
+  participarEventoClick
   Capybara.current_session.driver.quit
 end
 Before '@crearEventoConCategoria' do
@@ -63,10 +93,21 @@ def iniciarSesion
   fill_in 'password', :with => '123456'
   find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
 end 
-
+def iniciarSesionLider
+  visit('https://testing-start.web.app/login')
+  fill_in 'email', :with => 'lider@gmail.com'
+  fill_in 'password', :with => '123456'
+  find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
+end
 def iniciarSesionCoreTeam
   visit('https://testing-start.web.app/login')
   fill_in 'email', :with => 'coreteam@gmail.com'
+  fill_in 'password', :with => '123456'
+  find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
+end 
+def iniciarSesionVoluntario
+  visit('https://testing-start.web.app/login')
+  fill_in 'email', :with => 'voluntario@gmail.com'
   fill_in 'password', :with => '123456'
   find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
 end 
@@ -81,6 +122,21 @@ Before '@crearProyecto' do
   Capybara.current_session.driver.quit
 end
 
+Before '@ParticiparProyecto' do
+  name='detalleEl agua es oro por siempre'
+  iniciarSesionCoreTeam
+  #entrar al navigationbar proyectos
+  find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(2)').click
+  #entrar a la categoria medio ambiente
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button/div').click
+  #detalles del primer proyecto
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/a').click
+  
+  
+  click_on 'Unirme', match: :first
+  sleep(2)
+  Capybara.current_session.driver.quit
+end
 
 
 
@@ -102,7 +158,6 @@ end
 
 
 
-
 def crearProyecto()
   sleep(5)
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div[1]/div/div[2]/button').click
@@ -119,8 +174,26 @@ def crearProyecto()
   sleep(2)
 end
 
+def participarEventoClick
+  find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(3)').click
+  click_button('participar_EventoPrueba')
+  sleep(2)
+end
+def dejarParticiparEvento
+  find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(3)').click
+  content=page.has_content?('Dejar de Participar')
+  while content do
+    
+    click_on 'Dejar de Participar', match: :first
+    puts '**************************' 
+    puts content 
+    puts '**************************' 
+    sleep(2)
+    content = page.has_content?('Dejar de Participar')
+  end
+  sleep(2)
 
-
+end
 
 
 
