@@ -11,7 +11,6 @@
     fill_in 'password', :with => int
   end
   Then('se muestra en la pantalla en la parte derecha {string} indicando mis iniciales') do |iniciales|
-    sleep(2)
     inicialesPagina=find(:css,'#root > div:nth-child(2) > header > div.header-logo > div:nth-child(3) > div > div > span.MuiChip-label').text
     if(inicialesPagina!=iniciales)
       raise "Deberia mostrarse"+iniciales
@@ -62,6 +61,7 @@
   
   Given('presiono el boton de confirmar para eliminar {string}') do |tarjeta|
     click_button('eliminarevento'+tarjeta)
+    sleep(2)
   end
 
   When('elijo la categoria {string} en el dropdown') do |categoria|
@@ -69,6 +69,7 @@
   end
   When('presiono el boton de detalles en el evento Prueba') do
     find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div.Container-Body > div:nth-child(19) > div > div.CardBody-Eventos.card-body > div > button:nth-child(2)').click
+    sleep(2)
   end
   Then('muestra un titulo de {string}') do |string|
     titleText=find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.container1.container > div:nth-child(1) > div.Titulo-Eventos > h1:nth-child(2) > h3')
@@ -79,6 +80,7 @@
 
   When('presiono el boton de detalles en el evento {string}') do |string|
     click_button('Detalles_'+string)
+    sleep(2)
   end
   When('presiono el boton de crear evento') do
     click_button('crear_evento')
@@ -167,3 +169,28 @@
   Then('voy a presionar el boton {string}') do |string|
     find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
   end
+  When('presiono el boton editar') do
+    find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > button').click
+    sleep(2)
+  end
+  
+  When('lleno los campos a editar') do |table|
+    data = table.rows_hash
+    data.each_pair do |key, value|
+    case key
+    when "descripcion"
+      fill_in 'descripcion_evento', :with => value
+    when "lugar"
+      fill_in 'lugar_evento', :with => value
+    when "horaIn"
+      fill_in 'hora_inicio', :with => value
+    when "horaFin"
+      fill_in 'hora_fin', :with => value
+    end
+    end
+    sleep(2)
+  end
+  Then(' And presiono el boton de guardar cambios') do
+    
+  end
+

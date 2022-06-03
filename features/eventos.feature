@@ -67,7 +67,7 @@ Feature:Realizar operaciones sobre eventos
     @maximize
     @crearEventoFuturo
     @eliminarEvento
-    Scenario: Como coreteam quiero participar en un evento
+    Scenario: Como usuario quiero participar en un evento
         Given ingreso el correo <correo>
         And ingreso la contraseña <contrasena>
         And voy a presionar el boton "Iniciar sesion"
@@ -134,7 +134,7 @@ Feature:Realizar operaciones sobre eventos
     @maximize
     @crearEventoFuturo
     @eliminarEvento
-    Scenario: Como coreteam quiero ver los detalles en un evento
+    Scenario: Como usuario quiero ver los detalles en un evento
         Given ingreso el correo <correo>
         And ingreso la contraseña <contrasena>
         And voy a presionar el boton "Iniciar sesion"
