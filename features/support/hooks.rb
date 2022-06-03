@@ -64,3 +64,63 @@ def iniciarSesion
   find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
 end 
 
+def iniciarSesionCoreTeam
+  visit('https://testing-start.web.app/login')
+  fill_in 'email', :with => 'coreteam@gmail.com'
+  fill_in 'password', :with => '123456'
+  find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button').click
+end 
+
+Before '@crearProyecto' do
+  iniciarSesionCoreTeam
+  sleep(1)
+  page.driver.browser.manage.window.maximize
+  find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(2)').click
+  sleep(2)
+  crearProyecto()
+  Capybara.current_session.driver.quit
+end
+
+
+
+
+After '@eliminarProyecto' do
+  iniciarSesionCoreTeam
+  sleep(2)
+  find(:xpath,'/html/body/div/div[2]/header/div[2]/div/button[2]').click
+  sleep(1)
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button').click
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]').click
+  sleep(2)
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/a').click
+  sleep(2)
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/button').click
+  find(:xpath,'/html/body/div[2]/div[3]/div/div[3]/button[1]').click
+  sleep(2)
+  Capybara.current_session.driver.quit
+end
+
+
+
+
+def crearProyecto()
+  sleep(5)
+  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[1]/div/div[2]/button').click
+  sleep(2)
+  fill_in 'fecha_inicio',:with=>"05-05-2022"
+  fill_in 'fecha_fin',:with=>"06-06-2022"
+  fill_in 'titulo',:with=>"El agua es oro por siempre"
+  fill_in 'descripcion',:with=>"Proyecto que fortalece conocimientos para ahorrar agua "
+  fill_in 'objetivo',:with=>"Crear conciencia del uso del agua"
+  fill_in 'image_url',:with=>"https://adictec.com/media/2018/10/Mejores-herramientas-para-pruebas-testing-de-software.jpg "
+  sleep(1)
+  find(:css,"body > div:nth-child(6) > div.paper-crear > form > div:nth-child(3) > div.btn-crear-container").click
+  find(:xpath,"/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div").click
+  sleep(2)
+end
+
+
+
+
+
+
