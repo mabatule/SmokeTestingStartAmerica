@@ -11,6 +11,7 @@
     fill_in 'password', :with => int
   end
   Then('se muestra en la pantalla en la parte derecha {string} indicando mis iniciales') do |iniciales|
+    sleep(2)
     inicialesPagina=find(:css,'#root > div:nth-child(2) > header > div.header-logo > div:nth-child(3) > div > div > span.MuiChip-label').text
     if(inicialesPagina!=iniciales)
       raise "Deberia mostrarse"+iniciales

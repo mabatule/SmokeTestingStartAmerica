@@ -130,7 +130,7 @@ end
 #Deberia mostrarme en el card un mensaje de que estoy participando en el proyecto
 Then('Deberia mostrarme en el card un mensaje de que estoy participando en el proyecto') do	
     sleep(1)
-    mensaje=find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[3]').text
+    mensaje=find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[3]/span[1]').text
     if(mensaje=!"PARTICIPANDO")
         raise "No se pudo registrar la participacion"
     end
