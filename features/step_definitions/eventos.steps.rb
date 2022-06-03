@@ -2,7 +2,7 @@
 
   Given('estoy en la pagina de inicio de Start') do
     page.driver.browser.manage.window.maximize
-     visit('https://testing-start.web.app/login')
+    visit('https://testing-start.web.app/login')
   end
   When('ingreso el correo {string}') do |correo|
     fill_in 'email', :with => correo
