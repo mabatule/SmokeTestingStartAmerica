@@ -36,14 +36,18 @@ gem install page-object
     cucumber features
 
 
-### Page Object Model:
-Generate result in HTML format 
+### Resultados en HTML:
+Para general el los resultados siga las instrucciones
 Comando:
-para utilizar el informe generado en html puede ingresar la siguiente manera
-| <insert module> | <name module> |
-| ------------- | ------------- |
-| Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  |
-    rspec <insert module>.rb --format html --out <name module>.html
+para utilizar el informe generado en html puede ingresar la siguiente manera como esta descrito en la tabla
+| insert module            | name module html             |
+| -------------            | -------------                |
+| coreTeamProyectosSteps   | coreTeamProyectosSteps_html  |
+| cuenta                   | cuenta_html                  |
+| eventos                  | eventos_html                 |
+| liderVoluntarioProyectos | liderVoluntarioProyectos_html|
+| login                    | login_html                   |
+        
+  cucumber features\***(insert module)***.feature -f html -o ***(name module html)***.html
     Ejemplo:
-    rspec login.rb --format html --out login.html
+    cucumber features\eventos.feature -f html -o eventosTests.html
