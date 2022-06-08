@@ -1,4 +1,7 @@
 # Proyecto Final de Calidad de Sistemas SmokeTestingStartAmerica
+
+![LOGO_2020_2 0_STARTER_Horizontal-01-01-1](https://user-images.githubusercontent.com/74753713/172521905-cdc4f37b-0534-4622-87bd-a29b0fdf254b.jpg)
+
 # Herramientas
 
 - Ruby
