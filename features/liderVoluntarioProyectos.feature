@@ -5,15 +5,14 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
 
     
     Background: Ingresar a la pagina de estart
-        Given estoy en la pagina de inicio de Start
+        Given Estoy en la pagina de iniciar sesion de Start
 
 
     @maximize
     Scenario: Ver lista de participantes de un proyecto en especifico
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
-        And se muestra en la pantalla en la parte derecha <iniciales> indicando mis iniciales
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
@@ -27,10 +26,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
 
     
     Scenario: Ver eventos de un proyecto en especifico
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
-        And se muestra en la pantalla en la parte derecha <iniciales> indicando mis iniciales
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
@@ -47,10 +45,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
     @crearProyecto
     @eliminarProyecto
     Scenario: Dejar de participar en un proyecto
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
-        And se muestra en la pantalla en la parte derecha <iniciales> indicando mis iniciales
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
@@ -69,9 +66,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
     @crearProyecto
     @eliminarProyecto
     Scenario: Participar solo en proyectos vigentes
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
@@ -87,9 +84,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
     @crearProyecto
     @eliminarProyecto
     Scenario: Ver detalles de un proyecto en especifico
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
@@ -104,9 +101,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
     @crearProyecto
     @eliminarProyecto
     Scenario: Ingresar a una categoria de proyecto
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes 
@@ -118,9 +115,9 @@ Feature:Realizar operaciones que involucren los roles de lideres y voluntarios s
 
 
     Scenario: Ver lista de categoria de proyectos
-        Given ingreso el correo <correo>
-        And ingreso la contraseña <contrasena>
-        Then voy a presionar el boton "Iniciar sesion"
+        When Ingreso "coreteam@gmail.com" en el campo de correo para iniciar sesion
+        And Ingreso "123456" en el campo de contraseña para iniciar sesion
+        And Presiono el boton de Iniciar sesión
         Given Estoy en la seccion de proyectos de start
         When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
         Examples:

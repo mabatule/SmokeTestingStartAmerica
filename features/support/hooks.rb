@@ -1,4 +1,3 @@
-
 After do 
     Capybara.current_session.driver.quit
 end
@@ -149,7 +148,7 @@ After '@eliminarProyecto' do
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]').click
   sleep(2)
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/a').click
-  sleep(2)
+  sleep(5)
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/button').click
   find(:xpath,'/html/body/div[2]/div[3]/div/div[3]/button[1]').click
   sleep(2)

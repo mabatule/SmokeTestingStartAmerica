@@ -13,6 +13,8 @@ Background: Background name: Iniciar sesion en Start desde la cuenta de un CoreT
     Then se muestra en la pantalla en la parte derecha "CT" indicando mis iniciales
 
 
+
+
 Scenario: Ver lista de participantes de un proyecto en especifico
     Given Estoy en la seccion de proyectos de start
     When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
@@ -32,32 +34,29 @@ Scenario: Ver eventos de un proyecto en especifico
 
 @maximize
 @crearProyecto
-@eliminarProyecto
 Scenario: Dejar de participar en un proyecto
     Given Estoy en la seccion de proyectos de start
     When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
     And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
     When Me muestra los proyectos pertenencientes a la categoria de 'Medio ambiente'
-    And Selecciono unirme en el ultimo proyecto de la categoria Medio Ambiente
-    And Selecciono ver detalles del ultimo proyecto de la categoria Medio Ambiente
+    And Selecciono unirme en un proyecto de la categoria Medio Ambiente
+    And Selecciono ver detalles de un proyecto de la categoria Medio Ambiente
     And Selecciono boton de dejar de participar en proyecto
     Then Deberia mostrarme un boton de Participar en proyecto
 
 
 @maximize
 @crearProyecto
-@eliminarProyecto
 Scenario: Participar solo en proyectos vigentes
     Given Estoy en la seccion de proyectos de start
     When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
     And Selecciono la categoria de "Medio Ambiente" de los proyectos existentes
     When Me muestra los proyectos pertenencientes a la categoria de 'Medio ambiente'
-    And Selecciono unirme en el ultimo proyecto de la categoria Medio Ambiente
+    And Selecciono unirme en un proyecto de la categoria Medio Ambiente
     Then Deberia mostrarme en el card un mensaje de que estoy participando en el proyecto
     
 @maximize
 @crearProyecto
-@eliminarProyecto
 Scenario: Editar datos de un proyecto
     Given Estoy en la seccion de proyectos de start
     When Ingreso deberia ver una lista de las 8 categorias principales de proyectos
@@ -75,7 +74,7 @@ Scenario: Editar datos de un proyecto
     And presiono el boton de guardar cambios
     And Selecciono ver detalles del primer proyecto de la categoria Medio Ambiente
     Then Deberia mostrarme los detalles relacionados a un proyecto
-    Then Compruebo que minimamente la descripcion del proyecto "Descripción: Proyecto prueba descriptivo" este en el proyecto modificado
+    Then Compruebo que minimamente la descripcion del proyecto "Descripción: Proyecto automatizado editado" este en el proyecto modificado
 
 Scenario: Eliminar un proyecto
     Given Estoy en la seccion de proyectos de start

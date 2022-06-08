@@ -1,123 +1,119 @@
+require './features/pages/ProjectToolsPage.rb'
+@temporalList=[]
+$pageProject=-1
+
 Given("Estoy en la pagina de iniciar sesion de Start") do 
-    page.driver.browser.manage.window.maximize
+    page.driver.browser.manage.window.maximize()
     visit 'https://testing-start.web.app/login' 
+    $pageProject=ProjectToolsPage.new(page)
 end
 
 When('Ingreso {string} en el campo de correo para iniciar sesion') do  |email|
     sleep(1)
-    fill_in 'email', :with =>email
+    page.fill_in 'email', :with =>email
     sleep(2)
 end
 
 When("Ingreso {string} en el campo de contraseña para iniciar sesion") do  |contrasenia|
     sleep(1)
-    fill_in 'password', :with =>contrasenia
+    page.fill_in 'password', :with =>contrasenia
     sleep(2)
 end
 
 When("Presiono el boton de Iniciar sesión") do 
-    sleep(1)
-    find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > div.MuiGrid-root.jss13 > div > form > div > button').click
-    sleep(2)
+    $pageProject.click_the_button_css_maximize('#root > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > div.MuiGrid-root.jss13 > div > form > div > button')
 end
 
 Then('Deberia ver una barra de opciones y seccion de eventos proximos en la pagina principal') do 
-  sleep(5)
-  find(:xpath,'/html/body/div/div[2]/header/div[2]/div')
-  find(:xpath,'/html/body/div/div[2]/div[1]/section/div[1]/div[1]/div')
-  sleep(2)
+  @temporalList=['/html/body/div/div[2]/header/div[2]/div','/html/body/div/div[2]/div[1]/section/div[1]/div[1]/div']
+  $pageProject.addData(@temporalList)
+  $pageProject.exist_the_content_xpath()
+  @temporalList=[]
 end
 
 Given("Estoy en la seccion de proyectos de start") do 
-    sleep(1)
-    page.driver.browser.manage.window.maximize
-    find(:css,'#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(2)').click
-    sleep(2)
+    $pageProject.click_the_button_css('#root > div:nth-child(2) > header > div.header-menu > div > button:nth-child(2)')
 end
 
 When ('Ingreso deberia ver una lista de las 8 categorias principales de proyectos') do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[3]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[4]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[5]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[6]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[7]/div/div/a/button')
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[8]/div/div/a/button')
-    sleep(2)
+    @temporalList=[
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[3]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[4]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[5]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[6]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[7]/div/div/a/button',
+        '/html/body/div/div[2]/div[1]/div/div[2]/div/div[8]/div/div/a/button'
+    ]
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 When ('Selecciono la categoria de {string} de los proyectos existentes') do |categoria|
     sleep(1)
+    dir=""
     case categoria.downcase
     when "medio ambiente"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button/div'
     when "desarrollo sostenible"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div/a/button/div'
     when "trabajo social"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[3]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[3]/div/div/a/button/div'
     when "empoderamiento"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[4]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[4]/div/div/a/button/div'
     when "animales"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[5]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[5]/div/div/a/button/div'
     when "comunidad"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[6]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[6]/div/div/a/button/div'
     when "educacion"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[7]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[7]/div/div/a/button/div'
     when "otros"
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[8]/div/div/a/button/div').click
+        dir='/html/body/div/div[2]/div[1]/div/div[2]/div/div[8]/div/div/a/button/div'
     end
+    $pageProject.click_the_button_xpath(dir)
     sleep(2)
 end
 
 When ('Me muestra los proyectos pertenencientes a la categoria de {string}') do |categoria|
-    sleep(1)
-    begin
-        find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div')
-    rescue 
-        raise "No existe proyectos en esta categoria"
-    end
-    sleep(2)
+    @temporalList=['/html/body/div/div[2]/div[1]/div/div[2]/div']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 When('Selecciono ver detalles del primer proyecto de la categoria Medio Ambiente')do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/a').click
-    sleep(2)
+    $pageProject.click_the_button_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/a')
 end
 
-And('Selecciono ver detalles del ultimo proyecto de la categoria Medio Ambiente')do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/a').click
-    sleep(2) 
+And('Selecciono ver detalles de un proyecto de la categoria Medio Ambiente')do 
+    $pageProject.click_the_button_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[118]/div[2]/div[2]/a')
 end
 
-When('Selecciono unirme en el ultimo proyecto de la categoria Medio Ambiente')do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/div/div/button').click
-    sleep(2)
+When('Selecciono unirme en un proyecto de la categoria Medio Ambiente')do 
+    $pageProject.click_the_button_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[118]/div[2]/div[2]/div/div/button')
 end
 
 Then('Deberia mostrarme la lista de participantes de un proyecto')do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[3]')
-    sleep(2)
+    @temporalList=['/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[3]']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 Then('Deberia mostrarme los eventos relacionados a un proyecto')do 
-    sleep(1)
-    find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[2]')
-    sleep(2)
+    @temporalList=['/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[2]']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 Then('Deberia mostrarme en el card un mensaje de que estoy participando en el proyecto') do	
-    sleep(1)
-    mensaje=find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[3]/span[1]').text
-    if(mensaje=!"PARTICIPANDO")
-        raise "No se pudo registrar la participacion"
+    answer=$pageProject.compare_strings_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[3]/span[1]',"PARTICIPANDO")
+    if(answer==false)
+        put "No se registro la participación correctamente"
     end
-    sleep(2)
 end
 
 
@@ -130,50 +126,53 @@ Then('Deberia mostrarme los detalles relacionados a un proyecto') do
             raise "No muestra ningun detalle del proyecto"
         else
             puts "Revisando todos los detalles del proyecto"
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[1]')
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[2]')
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[3]')
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[4]')
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[5]')
-            find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[6]')
+            @temporalList=[
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[1]',
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[2]',
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[3]',
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[4]',
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[5]',
+                '/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[6]'
+            ]
+            $pageProject.addData(@temporalList)
+            $pageProject.exist_the_content_xpath()
+            @temporalList=[]
         end
     end
     sleep(2)
 end
 
 And('Hago click en el boton de eliminar') do
-  sleep(1)
-  find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/button').click
-  sleep(2)
+    $pageProject.click_the_button_xpath('/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/button')
 end
 
 Then('Deberia mostrar una ventana de confirmacion para eliminar proyecto') do
-  sleep(1)
-  find(:xpath,'/html/body/div[2]/div[3]/div')
-  sleep(2)
+    @temporalList=['/html/body/div[2]/div[3]/div']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 And('Hago click en eliminar') do
-  find(:xpath,'/html/body/div[2]/div[3]/div/div[3]/button[1]').click
-  sleep(2)
+    $pageProject.click_the_button_xpath('/html/body/div[2]/div[3]/div/div[3]/button[1]')
 end
 
 Then('Devuelve categorias de proyectos') do
-  sleep(1)
-  find(:xpath,'/html/body/div/div[2]/div[1]/div')
-  sleep(2)
+    @temporalList=['/html/body/div/div[2]/div[1]/div']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_xpath()
+    @temporalList=[]
 end
 
 And ('Selecciono el boton de editar el ultimo proyecto')do
-  sleep(1)
-  find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/button').click
-  sleep(2)
+    $pageProject.click_the_button_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/button')
 end
 
 Then('Deberia mostrarme un modal formulario')do
-    sleep(1)
-    find(:css,'body > div:nth-child(6) > div.paper-crear')
-    sleep(2)
+    @temporalList=['body > div:nth-child(6) > div.paper-crear']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_css()
+    @temporalList=[]
 end
 
 And('Edito los datos existentes del proyecto que estan en los campos del modal') do |table|
@@ -199,18 +198,14 @@ end
 end
 
 And('presiono el boton de guardar cambios')do 
-    sleep(1)
-    find(:css,'body > div:nth-child(6) > div.paper-crear > form > div:nth-child(3) > div.btn-crear-container').click
-    sleep(2)
+    $pageProject.click_the_button_css('body > div:nth-child(6) > div.paper-crear > form > div:nth-child(3) > div.btn-crear-container')
 end
 
 Then('Compruebo que minimamente el titulo {string} este en el proyecto nuevo')do |nombre_proyecto|
-    sleep(3)
-    nombre_proyecto_editado=find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[1]/p[1]').text
-    if(nombre_proyecto_editado!=nombre_proyecto)
+    answer=$pageProject.compare_strings_xpath('/html/body/div/div[2]/div[1]/div/div[2]/div/div[4]/div[2]/div[1]/p[1]',nombre_proyecto)
+    if(answer==false)
         raise "No se creo el proyecto correctamente"
     end
-    sleep(2)
 end
 
 Then('Deberia mostrarme los detalles del proyecto')do  |table|
@@ -229,15 +224,14 @@ Then('Deberia mostrarme los detalles del proyecto')do  |table|
 end 
 
 And('Selecciono el boton de crear proyecto')do
-    sleep(1)
-    find(:css,'#root > div:nth-child(2) > div:nth-child(2) > div > div.MuiBox-root.jss31 > div > div.MuiGrid-root.jss30.MuiGrid-item.MuiGrid-grid-xs-7.MuiGrid-grid-md-5 > button').click
-    sleep(2)
+    $pageProject.click_the_button_css('#root > div:nth-child(2) > div:nth-child(2) > div > div.MuiBox-root.jss31 > div > div.MuiGrid-root.jss30.MuiGrid-item.MuiGrid-grid-xs-7.MuiGrid-grid-md-5 > button')
 end
 
 When('Me muestra un formulario modal donde me pide ingresar datos')do
-    sleep(1)
-    find(:css,'body > div:nth-child(6) > div.paper-crear')
-    sleep(2)
+    @temporalList=['body > div:nth-child(6) > div.paper-crear']
+    $pageProject.addData(@temporalList)
+    $pageProject.exist_the_content_css()
+    @temporalList=[]
 end
 
 And('lleno los datos del nuevo proyecto')do |table|
@@ -263,33 +257,25 @@ end
 end
 
 And("presiono el boton de guardar cambios crear proyecto")do
-    sleep(1)
-    find(:css,"body > div:nth-child(6) > div.paper-crear > form > div:nth-child(3) > div.btn-crear-container").click
-    find(:xpath,"/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div").click
-    sleep(2)
+    $pageProject.click_the_button_css("body > div:nth-child(6) > div.paper-crear > form > div:nth-child(3) > div.btn-crear-container")
+    $pageProject.click_the_button_xpath("/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div")
 end
 
 And("Selecciono boton de dejar de participar en proyecto")do
-    sleep(1)
-    find(:xpath,"/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/button").click
-    sleep(2)
+    $pageProject.click_the_button_xpath("/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/button")
 end
 
 Then("Deberia mostrarme un boton de Participar en proyecto")do
-    sleep(2)
-    unirme=find(:xpath,"/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div[1]/div/button").text
-    if(unirme!="UNIRME")
+    answer=$pageProject.compare_strings_xpath("/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div[1]/div/button","UNIRME")
+    if(answer==false)
         raise "El boton no se actualizo"
     end
-    sleep(1)
 end
 
 
 Then('Compruebo que minimamente la descripcion del proyecto {string} este en el proyecto modificado')do |descripcion|
-    sleep(2)
-    descripcion_prueba=find(:xpath,"/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[3]").text
-    if(descripcion!=descripcion_prueba)
+    answer=$pageProject.compare_strings_xpath("/html/body/div/div[2]/div[1]/div/div/div/div[2]/p[3]",descripcion)
+    if(answer==false)
         raise "No se actualizo correctamente el proyecto"
     end
-    sleep(1)
 end
