@@ -12,11 +12,13 @@
 * Bernardo Claure Acevey
 * Mauricio Balderrama Ali
 
-### IMPORTANTE! COMO USAR 🔨
+### IMPORTANTE!🔨
 
 * Clonar desde el repositorio principal usando: 
 
 	- git clone https://github.com/mabatule1999/SmokeTestingStartAmerica.git
+	
+* Resultados de ejecución se encuentran en este repositorio en la carpeta de ResultHtml
 
 ### Introducción
 Tras la realización de las pruebas de caja negra en la aplicación web de Start vimos que la ejecución de los casos de prueba de manera manual era una tarea exhaustiva y que en un futuro esta tarea no sería sostenible debido al incremento de funcionalidades en la aplicación y las limitaciones de tiempo por lo cual vimos que debe existir una automatización de estas que ayuden a garantizar la exactitud y la estabilidad del software
