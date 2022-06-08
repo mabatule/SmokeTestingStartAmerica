@@ -1,9 +1,36 @@
 # Proyecto Final de Calidad de Sistemas SmokeTestingStartAmerica
-# Herramientas
+![LOGO_2020_2 0_STARTER_Horizontal-01-01-1](https://user-images.githubusercontent.com/74753713/172522628-2a26dfa7-dcc2-4916-a100-13e4861650c0.jpg)
 
+
+# Herramientas
 - Ruby
 - Cucumber
 - Capybara
+
+## NOMBRES 📋
+* Juan Luis Canedo Villarroel
+* Bernardo Claure Acevey
+* Mauricio Balderrama Ali
+
+### IMPORTANTE!🔨
+
+* Clonar desde el repositorio principal usando: 
+
+	- git clone https://github.com/mabatule1999/SmokeTestingStartAmerica.git
+	
+* Reporte de ejecución de las pruebas en Html se encuentran en este repositorio en la carpeta de ResultHtml
+
+### Introducción
+Tras la realización de las pruebas de caja negra en la aplicación web de Start vimos que la ejecución de los casos de prueba de manera manual era una tarea exhaustiva y que en un futuro esta tarea no sería sostenible debido al incremento de funcionalidades en la aplicación y las limitaciones de tiempo por lo cual vimos que debe existir una automatización de estas que ayuden a garantizar la exactitud y la estabilidad del software
+
+### Start WebApp
+Start WebApp es la página web sobre la cual se realizaron las pruebas de exploratory testing y  caja negra, esta página web tiene la finalidad de brindar ayuda en la gestión de los recursos que se manejan dentro de la institución de Start como sus eventos, proyectos y voluntarios de manera que el impacto social pueda ser más difundido y mejor manejado desde la aplicación
+Esta página web está en constante producción en la asignatura de “Taller de desarrollo de software” por lo cual es necesario realizar las pruebas con la misma constancia en la que se desarrolla brindando así un producto de beneficio y calidad.
+
+### Objetivos
+Priorizar las funcionalidades principales para garantizar el funcionamiento básico de la aplicación
+Realizar la automatización de las pruebas utilizando las herramientas Cucumber y Capybara
+Simplificar el trabajo innecesario, repetitivo o complejo haciéndolo efectivo y más productivo
 
 
 ## Enlaces
