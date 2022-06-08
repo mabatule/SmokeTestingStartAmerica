@@ -21,8 +21,8 @@ Feature:Realizar operaciones sobre Cuenta
         Examples:
             | correo                 | contrasena |
             | 'lider@gmail.com'      | '123456'     |
-            | 'coreteam@gmail.com'   | '123456'     |
-            | 'voluntario@gmail.com' | '123456'     |
+#            | 'coreteam@gmail.com'   | '123456'     |
+#            | 'voluntario@gmail.com' | '123456'     |
 
     @SinParticiparEventosLider
     @SinParticiparEventosCoreTeam
