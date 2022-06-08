@@ -42,81 +42,40 @@ Then('se muestra un un mensaje debajo del campo correo {string}') do |errorMessa
     page.has_content?(errorMessage)
 end 
 
-
-
-#************************************************************
-#************************************************************
-#************************************************************
-#************************************************************
-
-#************************************************************
-#Quiero iniciar sesion con usuario incorrecto
-#************************************************************
-
-When('Ingresar mis credenciales incorrectas {string} en usuario y {string} en password') do |email,password|
-    fill_in "email", with:email
-    fill_in "password", with:password
-    sleep 1.5
-end
-When('Hago click en {string}') do |btn_iniciar_sesion|
-    click_on (btn_iniciar_sesion)
-    sleep 1
-end 
-
-#************************************************************
-#Quiero iniciar sesion con usuario y password incorrecto
-#************************************************************
-When('Ingresar con usuario y passaword incorrectos {string} y {string}') do |email,password|
-    fill_in "email", with:email
-    fill_in "password", with:password
-    sleep 1.5
-end
-When('Hago click en {string}') do |btn_iniciar_sesion|
-    click_on (btn_iniciar_sesion)
-    sleep 1
-end 
-
-#************************************************************
-#Quiero iniciar sesion con el campo usuario vacio
-#************************************************************
-When('Ingresar las credenciales {string} en usuario y {string} en passaword') do |email,password|
-    fill_in "email", with:email
-    fill_in "password", with:password
-    sleep 1.5
+Then('Hago click en {string}') do |button_proyectos|
+    #click_on(button_proyectos)
+    find(:xpath,'//*[@id="root"]/div[2]/div[1]/section/div[1]/div/div[2]/button[2]').click
 end
 
+Then('muestra para iniciar sesion con el mensaje de Star {string}') do |message|
+    #page.has_content?(message)
+    find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[1]/h2')
+end
 
-#************************************************************
-#Quiero iniciar sesion con el campo password vacio
-#************************************************************
+When('Hago click en mi perfil') do
+    find(:xpath,'//*[@id="root"]/div[2]/header/div[1]/div[3]/div/div').click
+    sleep 2
+end
+When('Cerrar sesion con el boton {string}') do |button_logout|
+    click_on (button_logout)
+    sleep 2
+end
+Then('se muestra un un mensaje de la pagina principal {string}') do |message|
+    find(:xpath,'//*[@id="root"]/div[2]/div[1]/section/div[1]/div/div[1]/p')
+    sleep 2
+end
 
-#When('Ingresar las credenciales {string} en usuario y {string} en passaword') do |email,password|
-#    fill_in "email", with:email
-#    fill_in "password", with:password
-#    sleep 1.5
-#end
-Then('se muestra un un mensaje debajo del campo passaword {string}') do |errorMessage|
-    page.has_content?(errorMessage)
-end 
+When("Hago click en proyectos") do 
+    find(:xpath,'/html/body/div/div[2]/header/div[2]/div/button[2]').click
+    sleep 2
+end
 
-#************************************************************
-#Quiero iniciar sesion con el campo usuario y password vacios
-#************************************************************
+When("Entro a la categoria {string}") do |nameCategoria|
+    find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[1]/div/div/a/button').click
+    sleep 2
+end
+When("Entro al primer proyecto") do 
+    find(:xpath,'//*[@id="root"]/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/a').click
+    sleep 2
 
-#When('Ingresar las credenciales {string} en usuario y {string} en passaword') do |email,password|
-#    fill_in "email", with:email
-#    fill_in "password", with:password
-#    sleep 1.5
-#end
-
-#Then('se muestra un un mensaje debajo del campo passaword {string}') do |errorMessage|
-#    page.has_content?(errorMessage)
-#end 
-
-#************************************************************
-#Quiero iniciar sesion como Lider 
-#************************************************************
-
-#************************************************************
-#Quiero iniciar sesion como CoreTeam 
-#************************************************************
+end

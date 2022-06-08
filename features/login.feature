@@ -7,7 +7,10 @@ Feature: Realizar operaciones sobre el login
         Given estoy en la pagina de inicio de Start
 #        And Hago click en el boton "Iniciar Sesión"
 
-
+Scenario: Quiero explorar proyectos
+Given Estoy en la pagina de inicio de Start
+And Hago click en "Explora nuestros proyectos"
+Then muestra para iniciar sesion con el mensaje de Star "Incubadora de proyectos sociales y ambientales"
 
 Scenario: Quiero iniciar sesion      
 Given Estoy en la pagina de inicio de Start
@@ -92,3 +95,38 @@ Then se muestra un un mensaje debajo del campo correo "Campo requerido"
 Examples:
             | correo                 | contrasena |
             | ''                     | ''         |
+
+
+Scenario: Quiero cerrar sesion
+Given Estoy en la pagina de inicio de Start
+And Hago click en el boton "Iniciar Sesión"
+And Ingreso el campo correo <correo>
+And Ingreso la campo contraseña <contrasena>
+When Hago click "Iniciar Sesión"
+And Hago click en mi perfil
+And Cerrar sesion con el boton "Logout"
+Then se muestra un un mensaje de la pagina principal "Una experiencia personalizada de volutariado para impulsar líderes de impacto positivo. Explora causas y descubre la tuya, obtén un récord de tu participación activa, y acumula horas y experiencias de voluntariado."
+Examples:
+            | correo                 | contrasena |
+            | 'lider@gmail.com'      | '123456'   |
+            | 'coreteam@gmail.com'   | '123456'   |
+            | 'voluntario@gmail.com' | '123456'   |
+
+Scenario: Quiero ver los detalles de un evento y cerrar sesion 
+Given Estoy en la pagina de inicio de Start
+And Hago click en el boton "Iniciar Sesión"
+And Ingreso el campo correo <correo>
+And Ingreso la campo contraseña <contrasena>
+When Hago click "Iniciar Sesión"
+And Hago click en proyectos
+And Entro a la categoria "Medio Ambiente"
+And Entro al primer proyecto
+And Hago click en mi perfil
+And Cerrar sesion con el boton "Logout"
+Then se muestra un un mensaje de la pagina principal "Una experiencia personalizada de volutariado para impulsar líderes de impacto positivo. Explora causas y descubre la tuya, obtén un récord de tu participación activa, y acumula horas y experiencias de voluntariado."
+Examples:
+            | correo                 | contrasena |
+            | 'lider@gmail.com'      | '123456'   |
+            | 'coreteam@gmail.com'   | '123456'   |
+            | 'voluntario@gmail.com' | '123456'   |
+

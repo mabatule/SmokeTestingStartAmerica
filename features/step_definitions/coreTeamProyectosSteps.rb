@@ -1,4 +1,5 @@
-require './features/pages/ProjectToolsPage.rb'
+require './features/page_object_model/ProjectToolsPage.rb'
+
 @temporalList=[]
 $pageProject=-1
 
