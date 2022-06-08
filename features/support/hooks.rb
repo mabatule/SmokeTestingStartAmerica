@@ -52,6 +52,7 @@ Before '@crearEventoFuturo' do
   Capybara.current_session.driver.quit
 end
 Before '@participarEnEventoRoles' do
+  page.driver.browser.manage.window.maximize
   iniciarSesionLider
   participarEventoClick
 
@@ -150,6 +151,7 @@ After '@eliminarProyecto' do
   sleep(2)
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div[2]/div/div[91]/div[2]/div[2]/a').click
   sleep(2)
+  page.driver.browser.navigate.refresh
   find(:xpath,'/html/body/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/button').click
   find(:xpath,'/html/body/div[2]/div[3]/div/div[3]/button[1]').click
   sleep(2)
